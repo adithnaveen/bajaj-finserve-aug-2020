@@ -1,0 +1,271 @@
+Day 1 - MySQL 
+https://dev.mysql.com/doc/refman/8.0/en/tutorial.html
+
+DB (NoSQL)
+	MongoDB 
+	Redis 
+	DynamoDB
+	Cassandra 
+	
+DBMS (SQL)
+	Oracle 
+	MySQL 
+	DB2 
+	DB Derby 
+	Postgres 
+	
+
+SQL - Structured Query Language 
+
+DDL - Data Defination Language 
+	Create 
+	Alter
+	Truncate
+	Drop 
+	
+DML - Data Manipulation Languge 
+	Insert 
+	Update 
+	Delete
+	Merge 
+
+DQL - Data Query Language 
+	Select 
+	
+TCL - Transaction Control Language 
+	Commit 
+	Rollback
+	Save Point 
+	
+	
+DCL - Data Control Language 
+	Grant 
+	Revoke 
+	
+	
+	
+
+1972 - IBM - EF Coff, 1972 
+MS - Management System 
+	A - Atomicity 
+	C - Consistency 
+	I - Isolation 
+	D - Durability 
+RDBMS - Relational Database Management System 
+
+Table - Entity 
+	Bank
+		bankid (PK)
+		bankname (NN)
+		bankloc
+		
+	branch 
+		branch_id
+		branch_name
+		branch_addr
+		branch_email
+		bank_id
+		
+	Customer 
+		custid (PK)
+		custname (NN)
+		custaddress 
+		custemail (UK)
+		custcontact (UK)
+		
+	Account 
+		accno (PK) [UK + NN]
+		acctype 
+		branch_id (FK)
+		accbal 
+		accpin
+		
+Relation - Verb 
+	has a 
+	Belongs  to 
+
+
+Rahul 
+	Company (has) Employee
+	Employee (has) Account
+
+
+CRUD 
+	- Create,Read, Update, Delete 
+
+
+MySQL 
+
+
+DDL - Data Defination Language 
+	Create 
+		- Constrains (PK, UK, NN, Default, FK)
+
+char (30)
+varchar (30)
+
+> show databases; 
+> create database bajaj_fin_serve_db; 
+> use bajaj_fin_serve_db;
+> show tables; 
+
+> create table bank(bank_id int primary key,bank_name varchar(30) not null,bank_city varchar(30)); 
+
+Alter
+----------------------------------------------------------
+// alter can be used to add a column, drop a column, add an index, drop an index 
+> alter table bank add column bank_state varchar(30); 	
+	
+> alter table bank drop column bank_state; 
+	
+> alter table bank add column bank_state varchar(30); 	
+	
+> alter table bank add index inx_bank_city(bank_city)	
+> desc bank ; 
+
+// to list all the indexes 
+> show index from bank; 
+> show status 
+write a query to drop the index which you have created 
+> 	drop index inx_bank_city on bank;
+> alter table bank drop index inx_bank_city;
+	
+
+> create table branch (
+	branch_id int primary key auto_increment, 
+	branch_name varchar(30) not null, 
+	branch_addr varchar(30), 
+	branch_email varchar(50), 
+	bank_id int, 
+	foreign key (bank_id) references bank(bank_id)
+); 
+
+
+branch | CREATE TABLE `branch` (
+  `branch_id` int(11) NOT NULL AUTO_INCREMENT,
+  `branch_name` varchar(30) NOT NULL,
+  `branch_addr` varchar(30) DEFAULT NULL,
+  `branch_email` varchar(50) DEFAULT NULL,
+  `bank_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`branch_id`),
+  KEY `bank_id` (`bank_id`),
+  CONSTRAINT `branch_ibfk_1` FOREIGN KEY (`bank_id`) REFERENCES `bank` (`bank_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci |
+
+
+
+
+alter table to add foreign key to branch table 
+
+alter table bank so that it can have auto increment 
+> alter table bank modify  bank_id int auto_increment; 
+
+> alter table branch drop index branch_ibfk_1; 
+
+> show index from <table_name>; 
+
+> alter table branch drop foreign key  branch_ibfk_1; 
+
+> alter table branch add foreign key(bank_id) references bank(bank_id); 
+
+- no conditions 
+	Truncate
+	Drop 
+
+
+	
+DML - Data Manipulation Languge 
+	Insert 
+> insert into bank (bank_name, bank_city, bank_state) values('SBI', 'Bengaluru', 'Karnataka'); 
+> insert into bank (bank_name, bank_city, bank_state) values('HDFC', 'Bhubaneshwar', 'Odissa'); 
+> insert into bank (bank_name, bank_city, bank_state) values('CANARA', 'Bengaluru', 'Karnataka'); 
+
+
+> insert into branch (branch_name, branch_addr,branch_email,bank_id) values ('MG Road', 'Commercial street', 'contact.mgroad@sbi.com', 1); 
+
+> insert into branch (branch_name, branch_addr,branch_email,bank_id) values ('Majestic', 'KG Road', 'contact.kgroad@sbi.com', 1); 
+
+>  insert into branch (branch_name, branch_addr,branch_email,bank_id) values ('Koramangala', 'Koramangala', 'majestic.kgroad@sbi.com', 2);
+
+- truncate - which will take off all the records from the table, and you cannot get it back 
+
+> truncate table branch; 
+- delete - delete specified record
+
+Update 
+> update branch set branch_email='koramnagala@sbi.com' where branch_id=3; 
+
+
+	Delete
+	Merge 
+
+
+DQL 
+- Select 
+ 
+
+> select branch_name, branch_addr, if(branch_email is null,  "NOT AVAILABLE", branch_email) email from branch; 
+
+> SELECT BRANCH_NAME, BRANCH_ADDR, IFNULL(BRANCH_EMAIL, "NOT AVAILABLE") EMAIL FROM BRANCH; 
+
+
+partial_attribute_name% 
+%partial_attribute_name
+%partial_attribute_name% 
+
+
+> select * from branch where branch_email like '%sbi%'; 
+
+> select * from branch where branch_email like '%mgroad%' or branch_name like 'Kor%'; 
+
+> select * from branch where bank_id between 1 and 2;
+
+>  select * from branch where bank_id in (1,2) ; 
+
+
+Select Statement format 
+
+-- table level filtering 
+select column[s] 
+	from table[s], 
+	[where condition[s], ] 
+	order by [column/s]
+	
+
+
+select column[s] 
+	from table[s], 
+	where condition[s], 
+	group by [column/s]
+	having [condition/s]
+	order by [column/s]
+	
+
+branch_name, branch_email,  (Branch)
+bank_name, bank_city (Bank)
+
+
+
+> select br.branch_name as NAME, br.branch_email, bn.bank_name, bn.bank_city, bn.bank_id
+	from branch br, bank bn
+	where br.bank_id = bn.bank_id; 
+
+
+
+
+
+
+
+Day 2 - MySQL 
+
+
+
+
+
+Day 3 - JavaScript 
+Day 4 - React Native 
+
+
+
+
+
