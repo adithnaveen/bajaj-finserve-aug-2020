@@ -17,7 +17,7 @@ DBMS (SQL)
 
 SQL - Structured Query Language 
 
-DDL - Data Defination Language 
+DDL - Data Defintion Language 
 	Create 
 	Alter
 	Truncate
@@ -53,7 +53,11 @@ MS - Management System
 	D - Durability 
 RDBMS - Relational Database Management System 
 
-Table - Entity 
+
+Row - Tuple 
+Column - Field 
+
+Table - Entity (Noun) - Singular 
 	Bank
 		bankid (PK)
 		bankname (NN)
@@ -257,6 +261,34 @@ https://dev.mysql.com/doc/refman/8.0/en/tutorial.html
 
 
 Day 2 - MySQL 
+
+Day1 - Retro 
+-----------------
+
+Everything is stored in file 
+
+JSON 
+{
+	empid:101, 
+	empname:"Suresh", 
+	empsalary : 23323, 
+	address: {
+		houseno : 101, 
+		street : "Stephen Creek Blvd", 
+		city :"Cupertino",
+		state : "CA" 
+	}
+}
+
+
+Three schema architecture 
+
+
+To export 
+> mysqldump -u root -p database_name > filename.sql
+
+To import 
+> mysql -u root -p newdatabase_name < filename.sql 
 
 
 
