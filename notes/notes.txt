@@ -288,8 +288,167 @@ To export
 > mysqldump -u root -p database_name > filename.sql
 
 To import 
+You have to login to 
 > mysql -u root -p newdatabase_name < filename.sql 
 
+
+
+
+Step 1: > create database newdatabase 
+Step 2: > use newdatabase 
+Step 3: > copy the content and paste it 
+
+
+-- to display FIRSTNAME | LASTNAME | , EMAIL, DEPARTMENT_NAME  for all employees who belong to department_id =10 
+
+
+> explain SELECT e.FIRSTNAME, e.LASTNAME, e.EMAIL, d.DEPARTMENT_NAME  FROM EMPLOYEES E, DEPARTMENTS D   WHERE E.DEPARTMENT_ID = D.DEPARTMENT_ID AND D.DEPARTMENT_ID=10;
+
+> mysqlshow --verbose -u root -p
+> mysqlshow -k bajaj_db1 -u root -p 
+> mysqlshow -k bajaj_db1 EMPLOYEES -u root -p 
+
+
+
+>  mysqlshow [OPTIONS] [database [table [column]]]
+
+
+------------- 
+InnoDB 
+MyISAM 
+-------------
+
+
+List number of employees who are there in each department 
+
+Aggregate functions 
+ 
+SUM, COUNT, AVG, MIN, MAX 
+
+> select count(*), max(salary), min(salary), DEPARTMENT_ID from employees group by department_id; 
+
+
+> select count(*) from employees where department_id = 20
+
+
+
+Equi 
+
+Select e.empname, d,deptname, p.projname 
+	from employee e, department d, project p 
+	where e.deptid = d.deptid and e.projectid = p.projectid; 
+
+
+Select empname from employee where depid between 10 and 40 ;
+Select empname from employee where depid in (10,40) 
+
+
+Select DEPARTMENT_ID FROM DEPARTMENTS WHERE DEPARTMENT_NAME IN ("IT", "Shipping"); 
+
+Select FIRSTNAME from employees where department_id in (Select DEPARTMENT_ID FROM DEPARTMENTS WHERE DEPARTMENT_NAME IN ("IT", "Shipping")); 
+
+
+
+Select * from employees where department_id =90; 
+
+24000
+17000
+17000
+
+
+
+
+
+> SELECT count(*), avg(salary), d.DEPARTMENT_NAME
+	FROM employees e, departments d  
+  	WHERE e.Salary > (SELECT avg(Salary) FROM employees where department_id = e.department_id)
+	and d.DEPARTMENT_ID = e.DEPARTMENT_ID
+	Group by e.department_id 
+
+
+
+
+SELECT count(*), avg(salary), d.DEPARTMENT_NAME
+	FROM employees e, departments d  
+  	WHERE e.Salary > 10000
+	and d.DEPARTMENT_ID = e.DEPARTMENT_ID
+	Group by e.department_id 
+(SELECT avg(Salary) FROM employees where department_id = e.department_id)
+
+
+-- to list all employees who's salary is more than average salary in that department 
+
+Select count(*),  department_id  from employees e1 where salary > (select avg(salary) from employees e2 where e1.department_id = e2.department_id) 
+Group by department_id; 
+
+
+-- inner join 
+> select firstname, DEPARTMENT_NAME from employees e inner join  departments d on e.department_id = d.department_id ; 
+	
+
+ select distinct DEPARTMENT_NAME from employees e inner join  departments d on e.department_id = d.department_id ; 
+	
+
+1. Inner joins will give the records if it matches 
+2. Outer joins will give the records if it does not match 
+	a) Left Outer Join 
+	b) Right Outer Join 
+	c) Full Outer Join ( Left Outer Join  Union Right Outer Join ) 
+
+
+mysql> select firstname, DEPARTMENT_NAME from employees e inner join  departments d on e.department_id = d.department_id ; 
+
+
+> select e.firstname, d.department_name from departments d left outer join employees e on e.department_id = d.department_id  where e.firstname is null; 
+
+Empname = ''; 
+Empname is null (correct) 
+
+
+
+
+Self Join (join table with same table ) 
+
+
+
+employee_id | firstname | manager_id |
++-------------+-----------+------------+
+|         100 | Steven    |       NULL |
+|         101 | Neena     |        100 |
+|         102 | Lex       |        100 |
+|         103 | Alexander |        102 |
+|         104 | Bruce     |        103 |
++-------------+-----------+------------+
+ 
+
+ Select   e.firstname as 'EMPLOYEE', 'reports to',  m.firstname as 'MANAGER'  from employees e inner join employees m on m.employee_id = e.manager_id;
+
+
+E 
++-------------+-----------+------------+
+|         100 | Steven    |       NULL |
+|         101 | Neena     |        100 |
+|         102 | Lex       |        100 |
+|         103 | Alexander |        102 |
+|         104 | Bruce     |        103 |
++-------------+-----------+------------+
+
+M 
++-------------+-----------+------------+
+|         100 | Steven    |       NULL |
+|         101 | Neena     |        100 |
+|         102 | Lex       |        100 |
+|         103 | Alexander |        102 |
+|         104 | Bruce     |        103 |
++-------------+-----------+------------+
+
+
+-- self outer join 
+
+> select upper(ifnull(m.firstname, 'Managing Director')) as 'Manager' , upper(e.firstname) as 'Employee' from employees e left outer join employees m on m.employee_id = e.manager_id; 
+
+
+> insert into t1 values('{mykey:"my value"}'); 
 
 
 
