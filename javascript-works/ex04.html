@@ -109,6 +109,12 @@
 
         console.log("total is : ", total);
       }
+
+      function customfunction() {
+        for (var i = 0; i < customfunction.arguments.length; i++) {
+          console.log(customfunction.arguments[i]);
+        }
+      }
     </script>
   </head>
   <body>
@@ -123,6 +129,7 @@
 
       sum();
       sum(100, 200, 34, 45, 6);
+      customfunction("hi", 34, "bye", true, 34.4);
     </script>
   </body>
 </html>
