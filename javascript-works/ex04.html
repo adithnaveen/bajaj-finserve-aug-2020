@@ -39,16 +39,90 @@
         this.callChange();
         console.log("After call change... ");
       };
+
+      function fnArray() {
+        arr = new Array(5);
+
+        arr[0] = 100;
+        arr[1] = 200;
+        arr[2] = 300;
+        arr[3] = "India";
+        arr[4] = true;
+        arr[5] = 324.34;
+        arr[6] = "Bengaluru";
+
+        console.log(arr);
+        console.log(arr.length);
+        console.log(arr[0]);
+        console.log(typeof arr[3]);
+
+        if (typeof arr[3] === "number") {
+          console.log("It is number type");
+        } else if (typeof arr[3] === "string") {
+          console.log("It is number type");
+        } else {
+          console.log("Not of integer type");
+        }
+      }
+
+      function fnArray1() {
+        arr = new Array(5);
+
+        arr[0] = 100;
+        arr[1] = 200;
+        arr[2] = 300;
+        arr[3] = "India";
+        arr[4] = true;
+
+        // LIFO
+        console.log(arr);
+        arr.push("Sunday");
+        console.log(arr);
+        arr.pop();
+        console.log(arr);
+
+        // front adding and removing
+        arr.unshift("January");
+        console.log(arr);
+        arr.shift();
+        console.log(arr);
+
+        arr.splice(0, 0, "sunday", "monday", "tuesday");
+        console.log(arr);
+
+        arr.splice(1, 1);
+        console.log(arr);
+
+        arr.splice(3, 0, "HELLO", "HOW", "ARE", "YOU");
+        console.log(arr);
+
+        for (temp in arr) {
+          console.log(arr[temp]);
+        }
+      }
+
+      function sum() {
+        total = 0;
+        for (var i = 0; i < sum.arguments.length; i++) {
+          total += sum.arguments[i];
+        }
+
+        console.log("total is : ", total);
+      }
     </script>
   </head>
   <body>
     <input type="button" value="Click Object" onclick="fnObject()" />
-
+    <input type="button" value="Call Array" onclick="fnArray()" />
+    <input type="button" value="Call Array1" onclick="fnArray1()" />
     <script type="text/javascript">
       p = new Person("Pankaj", 101);
       p.display();
       // p.change();
       p.callChange();
+
+      sum();
+      sum(100, 200, 34, 45, 6);
     </script>
   </body>
 </html>

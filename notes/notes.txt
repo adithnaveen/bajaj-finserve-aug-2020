@@ -505,6 +505,91 @@ var x= 10; this will be private
 Object - Built In 
 new - memory getting allocated 
 function is treated as class 
+public - prototype 
+
+
+
+function Person(name, pid) {
+	this.name = name; 
+	this.pid = pid; 
+}
+================================================
+class Person {
+
+	String name; 
+	int pid; 
+	Person(String name, int pid) {
+		this.name = name; 
+		this.pid = pid; 
+	}
+	
+	void display(int x) {
+		print(this.name)
+		print(this.name)
+	}
+	
+	public void display(String x ) {
+		print(this.name)
+		print(this.name)
+	}
+}
+
+
+function Person(name, pid) {
+	this.name = name; 
+	this.pid = pid; 
+	
+	// scope 
+	display=  function () {
+		console.log(this.name); 
+		console.log(this.name); 
+	}
+}
+Person.prototype.display1 = function () {
+		console.log(this.name); 
+		console.log(this.name);
+}
+
+
+arr
+100
+200
+300
+400
+500
+
+
+
+arr.splice(indx, [no_of_elemnets_to_delete], [elements_to_add])
+
+arr.splice(4, 2)
+arr.splice(4, 2, 2,3,4,5)
+
+arr.splice(4, 0, 2,3,4,5)
+
+
+
+
+
+function Person(name, pid) {
+	this.name = name; 
+	this.pid = pid; 
+	
+	myfunc = function() {
+		// something 
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
