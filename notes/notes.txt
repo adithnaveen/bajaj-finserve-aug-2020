@@ -466,6 +466,68 @@ Webspehere (Java)
 jetty (Java)
 
 
+int x; 
+
+var x = 10 ; 
+var x = 23.4; 
+var x = "hi"; 
+var x = true; 
+var x = new Employee(); 
+
+
+var x = 10;var x = 23.4
+var x = "hi"
+var x = true
+var x = new Employee()
+
+
+Enter email : hello@hello.com  (client side, format checking )
+Enter email : hello@hello.com  (server side, user checking )
+
+
+
+1. alert - void 
+2. prompt - string (Text box)
+3. confirm - boolean (OK/Cancel)
+
+
+? - 0 or 1 
+* 0 or more 
++ 1 or more 
+. 1 
+[0-9] 
+
+
+x=10; -- this is global variable 
+var x= 10; this will be private 
+
+
+Object - Built In 
+new - memory getting allocated 
+function is treated as class 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Day 4 - React Native 
 
 

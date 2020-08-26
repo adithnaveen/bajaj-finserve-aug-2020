@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script type="text/javascript">
+      function fnObject() {
+        obj = new Object();
+        obj.x = 100;
+        obj.y = 200;
+
+        console.log(obj.x);
+        console.log(obj.y);
+
+        console.log(obj.z);
+      }
+
+      function Person(name, pid) {
+        this.name = name;
+        this.pid = pid;
+
+        // this will be private function which cannot be called from outside
+        // if you declare it as var then it is private
+        var change = function () {
+          console.log("You called change");
+        };
+
+        // privellged functions
+        this.callChange = function () {
+          console.log("You called Call Change");
+          change();
+        };
+      }
+
+      // public function
+      // prototype function are for usage only not to access private variables or
+      // private functions in class / function
+      Person.prototype.display = function () {
+        console.log("Name : ", this.name);
+        console.log("Id : ", this.pid);
+        this.callChange();
+        console.log("After call change... ");
+      };
+    </script>
+  </head>
+  <body>
+    <input type="button" value="Click Object" onclick="fnObject()" />
+
+    <script type="text/javascript">
+      p = new Person("Pankaj", 101);
+      p.display();
+      // p.change();
+      p.callChange();
+    </script>
+  </body>
+</html>
