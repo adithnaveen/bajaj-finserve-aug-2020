@@ -454,6 +454,18 @@ M
 
 
 Day 3 - JavaScript 
+
+Web Server 
+----------
+Tomcat  (java) 
+DJango (Pyhton)
+IIS (MS)
+WebLogic (Java)
+NodeJS (Javascript)
+Webspehere (Java)
+jetty (Java)
+
+
 Day 4 - React Native 
 
 
