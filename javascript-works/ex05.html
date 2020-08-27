@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script type="text/javascript">
+      function fnGetBgColor() {
+        var __bodyAttributes = document.body.attributes;
+        var __body = document.body;
+        console.log(
+          "Number of attributes attached is ",
+          __bodyAttributes.length
+        );
+        //   console.log("Attributes ", __bodyAttributes);
+        console.log(__body.getAttribute("bgcolor"));
+      }
+
+      function fnSetBgColor(color) {
+        document.body.setAttribute("bgcolor", color);
+      }
+
+      function fnManipulate() {
+        var __epara = document.body.getElementsByTagName("p")[0];
+        console.log(__epara);
+        // <b> </b>
+        var __newTag = document.createElement("b");
+        // Hello I'm New Para
+        var __text = document.createTextNode("Hello I'm New Para");
+        // <b>Hello I'm New Para</b>
+        __newTag.append(__text);
+
+        // document.body.replaceChild(__newTag, __epara);
+        document.body.insertBefore(__newTag, __epara);
+      }
+    </script>
+  </head>
+  <body bgcolor="cyan">
+    <p>Hi I'm first Para</p>
+    <input type="button" value="Get BG Color" onclick="fnGetBgColor()" />
+    <br />
+
+    <input type="button" value="RED" onmouseover="fnSetBgColor('red')" />
+    <input type="button" value="CYAN" onmouseover="fnSetBgColor('CYAN')" />
+    <input type="button" value="ORANGE" onmouseover="fnSetBgColor('orange')" />
+    <input
+      type="button"
+      value="DOGGERBLUE"
+      onmouseover="fnSetBgColor('doggerblue')"
+    />
+
+    <hr />
+
+    <input type="button" value="DOM Manipulate" onclick="fnManipulate()" />
+  </body>
+</html>
